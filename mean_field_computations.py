@@ -275,8 +275,9 @@ def run_seed_mf(N,seed,sunit_map,translator,p=0.5,iterations=10,pinning=set([]),
             update='synchronous',order=None,regenerate=False,oh=False,names='string'):
     
     act_nodes,act_prob=mf_seed(N,seed,sunit_map,translator,p=p,iterations=iterations,names=names)
+    # print(act_nodes,act_prob)
     if update=='synchronous':
-        return synchronous_mf(N,act_nodes,act_prob,iterations,pinning,reduced,ds,pin_start)
+        return [synchronous_mf(N,act_nodes,act_prob,iterations,pinning,reduced,ds,pin_start), act_nodes, act_prob]
     if update=='asynchronous':
         return asynchronous_mf(N,act_nodes,act_prob,iterations,pinning,reduced,ds,pin_start,order,regenerate,oh)
     if update=='stochastic asynchronous':
